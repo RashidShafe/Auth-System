@@ -1,7 +1,8 @@
 const express = require('express');
-const app=express();
-// const User=require('./models/user');
+const app = express();
+
 const userRouter = require('./routes/user');
+const User = require('./models/user');
 
 require('./models/db');
 
@@ -21,6 +22,14 @@ app.get('/', (req,res)=>{
 
 app.use(express.json());
 app.use(userRouter);
+
+// const checkingUser = async (email, password) =>{
+//     const user = await User.findOne({email: email});
+//     const result = await user.comparePassword(password);
+//     console.log(result);
+// };
+
+// checkingUser('vai@mail.com', '545425678');
 
 app.get('/test', (req,res)=>{
     res.send("hello from test");

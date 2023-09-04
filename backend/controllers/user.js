@@ -25,6 +25,7 @@ exports.createUser = async (req, res) => {
 exports.userSignIn =async (req,res) =>{
     const {email,password} = req.body;
     const isUser = await User.findOne({email});
+    const mail=isUser ? isUser.email : '' ;
 
     if(!isUser) return res.json({
         success:false,
@@ -40,6 +41,6 @@ exports.userSignIn =async (req,res) =>{
     const token = jwt.sign({userId: isUser._id}, process.env.JWT_SECRET, {expiresIn:'1d'});
 
     res.json({
-        success:true, isUser, token
+        success:true, mail, token
     });
 }

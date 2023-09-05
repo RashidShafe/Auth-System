@@ -2,6 +2,7 @@ import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'expo-router';
 
 export default function Login() {
     const [user, setUser] = useState({
@@ -43,7 +44,7 @@ export default function Login() {
                 onChangeText={(text) => setUser({ ...user, password: text })}
             />
             <Button onPress={handleLogin} title='Log In' />
-            <Text onPress={() => {}}>No account? Sign-up Now.</Text>
+            <Link href="/pages/Reg"> <Text >No account? Sign-up Now.</Text></Link>
         </View>
     )
 }

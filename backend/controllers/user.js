@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const VerificationToken = require('../models/verificationToken');
 const jwt = require('jsonwebtoken');
 
 exports.createUser = async (req, res) => {
@@ -18,6 +19,13 @@ exports.createUser = async (req, res) => {
         password
     });
 
+    const OTP = Math.floor(Math.random()*9000)+1000;
+    const verificationToken = new VerificationToken({
+        owner: user._id,
+        token: OTP
+    })
+
+    await verificationToken.save();
     await user.save();
     res.json(user);
 };

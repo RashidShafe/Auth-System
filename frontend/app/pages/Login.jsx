@@ -39,12 +39,12 @@ export default function Login() {
                 placeholder='E-mail'
                 onChangeText={(text) => setUser({ ...user, email: text })}
             />
-            <TextInput style={styles.input}
+            <TextInput style={{...styles.input, marginBottom:30}}
                 placeholder='Password' secureTextEntry={true}
                 onChangeText={(text) => setUser({ ...user, password: text })}
             />
             <Button onPress={handleLogin} title='Log In' />
-            <Link href="/pages/Reg"> <Text >No account? Sign-up Now.</Text></Link>
+            {/* <Link href="/pages/Reg"> <Text >No account? Sign-up Now.</Text></Link> */}
         </View>
     )
 }

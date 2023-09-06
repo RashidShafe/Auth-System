@@ -32,7 +32,7 @@ export default function Reg() {
             <TextInput style={styles.input} placeholder='Full Name' onChangeText={(text) => setregUser({ ...regUser, fullname: text })}/>
             <TextInput style={styles.input} placeholder='E-mail' onChangeText={(text) => setregUser({ ...regUser, email: text })}/>
             <TextInput style={styles.input} placeholder='Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, password: text })}/>
-            <TextInput style={styles.input} placeholder='Confirm Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, confirmPass: text })}/>
+            <TextInput style={{...styles.input, marginBottom:30}} placeholder='Confirm Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, confirmPass: text })}/>
             <Button title='Register' onPress={handleReg} />
         </View>
   )

@@ -31,10 +31,6 @@ app.use(userRouter);
 
 // checkingUser('vai@mail.com', '545425678');
 
-app.get('/test', (req,res)=>{
-    res.send("hello from test");
-});
-
 app.listen(8000, ()=>{
     console.log("backend initialized");
 });

@@ -2,7 +2,7 @@ const {check, validationResult} = require('express-validator');
 
 exports.validateUserSignUp = [
     check('fullname').trim().not().isEmpty().isString().withMessage('input name correctly'),
-    check('email').normalizeEmail().isEmail().withMessage('Invalid Email'),
+    check('email').isEmail().withMessage('Invalid Email'),
     check('password').trim().not().isEmpty().isLength({min:8}).withMessage('invalid password'),
     check('confirmPass').trim().not().isEmpty().custom((value, {req})=>{
         if(value !== req.body.password){

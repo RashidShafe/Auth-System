@@ -1,17 +1,18 @@
-import { View, Text, TextInput,StyleSheet,Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
-import axios  from 'axios';
+import axios from 'axios';
 
 export default function Reg() {
+    const [regClicked, setRegclicked] = useState(false);
     const [regUser, setregUser] = useState({
         fullname: '',
         email: '',
         password: '',
-        confirmPass:''
+        confirmPass: ''
     });
 
-    const handleReg =() => {
+    const handleReg = () => {
         // alert(user.password + user.email);
         const apiUrl = 'http://192.168.0.16:8000/create-user';
 
@@ -20,6 +21,7 @@ export default function Reg() {
             .then(response => {
                 // Handle the response data here (e.g., authentication success or error)
                 console.log(response.data);
+                setRegclicked = true;
             })
             .catch(error => {
                 // Handle any errors that occur during the request
@@ -27,15 +29,24 @@ export default function Reg() {
             });
     }
 
-  return (
-    <View style={styles.form}>
-            <TextInput style={styles.input} placeholder='Full Name' onChangeText={(text) => setregUser({ ...regUser, fullname: text })}/>
-            <TextInput style={styles.input} placeholder='E-mail' onChangeText={(text) => setregUser({ ...regUser, email: text })}/>
-            <TextInput style={styles.input} placeholder='Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, password: text })}/>
-            <TextInput style={{...styles.input, marginBottom:30}} placeholder='Confirm Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, confirmPass: text })}/>
+    const handlesubmit = () => {
+
+    }
+
+    return (
+        <View style={styles.form}>
+            <TextInput style={styles.input} placeholder='Full Name' onChangeText={(text) => setregUser({ ...regUser, fullname: text })} />
+            <TextInput style={styles.input} placeholder='E-mail' onChangeText={(text) => setregUser({ ...regUser, email: text })} />
+            <TextInput style={styles.input} placeholder='Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, password: text })} />
+            <TextInput style={{ ...styles.input, marginBottom: 30 }} placeholder='Confirm Password' secureTextEntry={true} onChangeText={(text) => setregUser({ ...regUser, confirmPass: text })} />
+            {regClicked ? <View>
+                <TextInput style={{ ...styles.input, marginBottom: 30 }} placeholder='Enter OTP' />
+                <Button title='Submit' onPress={handlesubmit} />
+            </View> : <Button title='Register' onPress={handleReg} />}
+
             <Button title='Register' onPress={handleReg} />
         </View>
-  )
+    )
 }
 
 const styles = StyleSheet.create({
@@ -48,5 +59,5 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 20,
     },
-    
+
 });

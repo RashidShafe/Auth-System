@@ -15,13 +15,12 @@ export default function App() {
 
   return (
       <NavigationContainer>
-        <Stack.Navigator style={styles.container} initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Reg" component={Reg} options={{ headerShown: false }}/>
           <Stack.Screen name="OtpSubmit" component={OtpSubmit} options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
-
   );
 }
 

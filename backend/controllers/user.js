@@ -1,8 +1,10 @@
+const { isValidObjectId } = require('mongoose');
 const User = require('../models/user');
 const VerificationToken = require('../models/verificationToken');
 
 const jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
+const verificationToken = require('../models/verificationToken');
 
 exports.createUser = async (req, res) => {
     const { fullname, email, password } = req.body;
@@ -79,4 +81,51 @@ exports.userSignIn = async (req, res) => {
     res.json({
         success: true, mail, token
     });
-}
+};
+
+exports.verifyEmail = async(req,res)=>{
+    const {userId, otp} = req.body;
+
+    if(!userId || !otp.trim()) return res.json({
+        success: false,
+        message: "False"
+    });
+
+    if(!isValidObjectId(userId)) return res.json({
+        success: false,
+        message: "Invalid user id"
+    });
+
+    const user = await User.findById(userId);
+
+    if(!user) return res.json({
+        success: false,
+        message: "No user found"
+    }); 
+
+    if(user.verified) return res.json({
+        success: false,
+        message: "Account aready verified!"
+    }); 
+
+    const token=await VerificationToken.findOne({owner: user._id})
+
+    if(!token) return res.json({
+        success: false,
+        message: "User not found!"
+    });
+
+    const isMatched = await token.compareToken(otp);
+
+    if(!isMatched) return res.json({
+        success: false,
+        message: "not a valid token"
+    });
+
+    await User.findByIdAndUpdate(userId, { verified: true });
+    await verificationToken.findByIdAndDelete(token._id);
+
+    res.json({
+        success:true,
+    });
+};

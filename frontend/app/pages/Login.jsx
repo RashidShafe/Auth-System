@@ -41,7 +41,6 @@ export default function Login({ navigation }) {
                 />
                 <Button onPress={handleLogin} title='Log In' />
                 <Text style={styles.link} onPress={() => navigation.navigate('Reg')} >No account? Sign-up Now.</Text>
-                {/* <Text  title='No account? Sign-up Now.' /> */}
                 {/* <Link href="/pages/Reg"> <Text >No account? Sign-up Now.</Text></Link> */}
             </View>
         </View>

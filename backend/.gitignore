@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-
+.env
 # debug
 npm-debug.*
 yarn-debug.*

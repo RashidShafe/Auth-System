@@ -36,8 +36,8 @@ exports.createUser = async (req, res) => {
         host: "smtp.gmail.com",
         port: 465,
         auth: {
-            user: "journal.engine.0@gmail.com",
-            pass: "ftfdauzwgkxzxdkv",
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASS
         },
     });
     async function mail() {
